@@ -14,6 +14,7 @@ function App() {
     const tg = window.Telegram ? window.Telegram.WebApp : null;
     if (tg) {
       const user = tg.initData?.user;
+      console.log(user);
       const data = {
         text,
         user: {
