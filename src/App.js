@@ -2,6 +2,9 @@ import { useEffect, useState, useCallback } from 'react';
 
 function App() {
   const [text, setText] = useState('');
+  var WebApp = window.Telegram.WebApp;
+
+  WebApp.showAlert(`Добро пожаловать, @${WebApp.WebAppUser.username}.`);
 
   useEffect(() => {
     if (!window.Telegram) {
