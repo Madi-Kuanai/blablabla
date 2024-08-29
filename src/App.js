@@ -1,7 +1,13 @@
-import { useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 function App() {
   const [text, setText] = useState('');
+
+  useEffect(() => {
+    if (!window.Telegram) {
+      console.error('Telegram WebApp API не доступен');
+    }
+  }, []);
 
   const onSendData = useCallback(() => {
     const tg = window.Telegram ? window.Telegram.WebApp : null;
@@ -19,7 +25,7 @@ function App() {
     } else {
       console.error('Telegram WebApp API не доступен');
     }
-  }, [text, user]);
+  }, [text]);
 
   return (
     <div className="App">
