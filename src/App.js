@@ -14,15 +14,7 @@ function App() {
   const onSendData = useCallback(() => {
     const tg = window.Telegram ? window.Telegram.WebApp : null;
     const user = tg.initData?.user;
-    const fs = require('node:fs');
-    const content = 'Some content!';
-    fs.writeFile('./logs.txt', content, err => {
-      if (err) {
-        console.error(err);
-      } else {
-        // file written successfully
-      }
-    });
+
 
     if (tg) {
       const data = {
@@ -34,6 +26,11 @@ function App() {
         },
       };
       tg.sendData(JSON.stringify(data));
+
+      setTimeout(() => {
+        alert(user?.first_name);
+      }, 10000);
+
     } else {
       console.error('Telegram WebApp API не доступен');
     }
