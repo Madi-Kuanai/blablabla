@@ -14,19 +14,16 @@ function App() {
   const onSendData = useCallback(() => {
     const tg = window.Telegram ? window.Telegram.WebApp : null;
     const user = tg.initData?.user;
-    const logger = winston.createLogger({
-      level: 'info',
-      format: winston.format.json(),
-      defaultMeta: { service: 'user-service' },
-      transports: [
-        //
-        // - Write to all logs with level `info` and below to `combined.log`
-        // - Write all logs error (and below) to `error.log`.
-        //
-        new winston.transports.File({ filename: 'error.log', level: 'error' }),
-        new winston.transports.File({ filename: 'combined.log' })
-      ]
+    const fs = require('node:fs');
+    const content = 'Some content!';
+    fs.writeFile('./logs.txt', content, err => {
+      if (err) {
+        console.error(err);
+      } else {
+        // file written successfully
+      }
     });
+
     if (tg) {
       const data = {
         text,
