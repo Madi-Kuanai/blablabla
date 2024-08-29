@@ -1,38 +1,49 @@
 .App {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1c1c1c; /* Темный фон */
+  margin: 0;
+  flex-direction: column; /* Располагаем дочерние элементы вертикально */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 300px;
 }
 
-.App-link {
-  color: #61dafb;
+.text-box {
+  width: 50%;
+  height: 50%;
+  border: 1px solid #444; /* Темная граница */
+  background-color: #333; /* Темный фон для текстбокса */
+  color: #fff; /* Белый текст */
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: none; /* Отключение возможности изменения размера */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.submit-button {
+  margin-top: 10px;
+  background-color: #444; /* Темный фон кнопки */
+  color: #fff; /* Белый текст */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #555; /* Слегка светлее при наведении */
+}
+
+.icon{
+  max-width: 80%;
+  margin-bottom: 20px;
 }
