@@ -1,31 +1,38 @@
-import './App.css';
-import {Header} from './components/Header'
-import { useState } from 'react';
+const TelegramBot = require('node-telegram-bot-api');
 
-function App() {
-  const [text, setText] = useState('');
+const token = '7269294517:AAG1QwDqlAfUKCdXFQWBfayy_GXHCKygljk';
+const bot = new TelegramBot(token, { polling: true });
 
-  const handleSubmit = () => {
-    const user = window.Telegram.WebApp.initDataUnsafe.user;
-    window.Telegram.WebApp.sendData(text);
-    window.Telegram.WebApp.sendData(user);
+bot.on('message', async (msg) => {
+  const chatId = msg.chat.id;
+  const text = msg.text;
+
+  if (text === "/start") {
+    await bot.sendMessage(chatId, "проПРПОПРОПРО", {
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "Заполни форму", web_app: { url: "https://aitu--aitu-secrets.netlify.app/" } }]
+        ]
+      }
+    });
+  }
+});
+
+bot.on('web_app_data', async (msg) => {
+  const chatId = msg.chat.id;
+  const webAppData = msg.web_app_data.data;
+
+  try {
+    const parsedData = JSON.parse(webAppData);
     
-  };
-  return (
-    <>    <div className="App">
-      {<Header/>}
-      <textarea
-          className="text-box"
-          placeholder="Введите текст..."
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        ></textarea>
-        <button className="submit-button" onClick={handleSubmit}>
-          Отправить
-        </button>
-    </div>
-    </>
-  );
-}
+    // Данные пользователя и текст
+    const { text, user } = parsedData;
 
-export default App;
+    const userInfo = `Пользователь: ${user.firstName} ${user.lastName} (@${user.username})`;
+    const message = `Полученные данные:\nТекст: ${text}\n${userInfo}`;
+    
+    await bot.sendMessage(chatId, message);
+  } catch (error) {
+    await bot.sendMessage(chatId, `Ошибка при разборе данных: ${error.message}`);
+  }
+});
