@@ -26,7 +26,7 @@ function App() {
       };
       setTimeout(() => {
         alert(user?.first_name);
-      }, 10000);
+      }, 1000);
 
       tg.sendData(JSON.stringify(data));
 
