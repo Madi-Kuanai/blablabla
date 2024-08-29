@@ -17,6 +17,7 @@ function App() {
         username: user?.username,
       }
     }
+    console.log(data)
     tg.sendData(JSON.stringify(data));
 }, [text, data_user])
 
