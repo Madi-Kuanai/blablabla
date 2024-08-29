@@ -23,6 +23,9 @@ function App() {
         },
       };
       tg.sendData(JSON.stringify(data));
+
+      console.log(tg)
+      alert("Ваше сообщение получено")
     } else {
       console.error('Telegram WebApp API не доступен');
     }
