@@ -1,26 +1,23 @@
 import './App.css';
 import { Header } from './components/Header';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 function App() {
   const [text, setText] = useState('');
   const user = window.Telegram.WebApp.initDataUnsafe.user;
   const tg = window.Telegram.WebApp;
 
-
   const onSendData = useCallback(() => {
     const data = {
       text,
-      data_user: {
+      user: {
         firstName: user?.first_name,
         lastName: user?.last_name,
         username: user?.username,
       }
-    }
-    console.log(data)
+    };
     tg.sendData(JSON.stringify(data));
-}, [text, data_user])
-
+  }, [text, user, tg]);
 
   return (
     <>    
