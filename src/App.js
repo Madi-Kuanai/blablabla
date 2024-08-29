@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import "./App.css"
+import {Header} from "./components/Header";
 
 function App() {
   const [text, setText] = useState('');
@@ -37,6 +38,7 @@ function App() {
 
   return (
       <div className="App">
+        <Header/>
       <textarea
           className="text-box"
           placeholder="Введите текст..."
