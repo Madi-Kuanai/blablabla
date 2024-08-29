@@ -1,38 +1,42 @@
-const TelegramBot = require('node-telegram-bot-api');
+import './App.css';
+import { Header } from './components/Header';
+import { useState } from 'react';
 
-const token = '7269294517:AAG1QwDqlAfUKCdXFQWBfayy_GXHCKygljk';
-const bot = new TelegramBot(token, { polling: true });
+function App() {
+  const [text, setText] = useState('');
+  const user = window.Telegram.WebApp.initDataUnsafe.user;
+  const tg = window.Telegram.WebApp;
 
-bot.on('message', async (msg) => {
-  const chatId = msg.chat.id;
-  const text = msg.text;
 
-  if (text === "/start") {
-    await bot.sendMessage(chatId, "проПРПОПРОПРО", {
-      reply_markup: {
-        inline_keyboard: [
-          [{ text: "Заполни форму", web_app: { url: "https://aitu--aitu-secrets.netlify.app/" } }]
-        ]
+  const onSendData = useCallback(() => {
+    const data = {
+      text,
+      data_user: {
+        firstName: user?.first_name,
+        lastName: user?.last_name,
+        username: user?.username,
       }
-    });
-  }
-});
+    }
+    tg.sendData(JSON.stringify(data));
+}, [text, data_user])
 
-bot.on('web_app_data', async (msg) => {
-  const chatId = msg.chat.id;
-  const webAppData = msg.web_app_data.data;
 
-  try {
-    const parsedData = JSON.parse(webAppData);
-    
-    // Данные пользователя и текст
-    const { text, user } = parsedData;
+  return (
+    <>    
+      <div className="App">
+        <Header />
+        <textarea
+          className="text-box"
+          placeholder="Введите текст..."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        ></textarea>
+        <button className="submit-button" onClick={onSendData}>
+          Отправить
+        </button>
+      </div>
+    </>
+  );
+}
 
-    const userInfo = `Пользователь: ${user.firstName} ${user.lastName} (@${user.username})`;
-    const message = `Полученные данные:\nТекст: ${text}\n${userInfo}`;
-    
-    await bot.sendMessage(chatId, message);
-  } catch (error) {
-    await bot.sendMessage(chatId, `Ошибка при разборе данных: ${error.message}`);
-  }
-});
+export default App;
