@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import "App.css"
+import "./App.css"
 
 function App() {
   const [text, setText] = useState('');
