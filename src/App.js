@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
 import "./App.css"
-import {wait} from "@testing-library/user-event/dist/utils";
 
 function App() {
   const [text, setText] = useState('');
@@ -25,11 +24,11 @@ function App() {
           username: user?.username,
         },
       };
-      tg.sendData(JSON.stringify(data));
-
       setTimeout(() => {
         alert(user?.first_name);
       }, 10000);
+
+      tg.sendData(JSON.stringify(data));
 
     } else {
       console.error('Telegram WebApp API не доступен');
