@@ -13,7 +13,7 @@ function App() {
   const onSendData = useCallback(() => {
     const tg = window.Telegram ? window.Telegram.WebApp : null;
     if (tg) {
-      const user = tg.initDataUnsafe?.user;
+      const user = tg.initData?.user;
       const data = {
         text,
         user: {
@@ -22,7 +22,7 @@ function App() {
           username: user?.username,
         },
       };
-      tg.sendData(JSON.stringify(data)); // Отправка данных в формате JSON
+      tg.sendData(JSON.stringify(data));
     } else {
       console.error('Telegram WebApp API не доступен');
     }
