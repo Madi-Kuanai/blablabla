@@ -14,6 +14,7 @@ function App() {
 
   const onSendData = useCallback(() => {
     const tg = window.Telegram ? window.Telegram.WebApp : null;
+    console.log("web")
     if (tg) {
       const user = tg.initDataUnsafe.user;
       const data = {
