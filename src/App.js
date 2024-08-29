@@ -26,7 +26,7 @@ function App() {
                 },
             };
             setTimeout(() => {
-                alert(user?.first_name);
+                alert(tg?.initDataUnsafe.user.first_name);
             }, 1000);
 
             tg.sendData(JSON.stringify(data));
