@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import "./App.css"
+import {wait} from "@testing-library/user-event/dist/utils";
 
 function App() {
   const [text, setText] = useState('');
@@ -12,9 +13,10 @@ function App() {
 
   const onSendData = useCallback(() => {
     const tg = window.Telegram ? window.Telegram.WebApp : null;
+    const user = tg.initData?.user;
+    console.log(user);
+    wait(100).then(r => {})
     if (tg) {
-      const user = tg.initData?.user;
-      console.log(user);
       const data = {
         text,
         user: {
