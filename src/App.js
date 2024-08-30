@@ -37,7 +37,7 @@ function App() {
                     result: {
                         type: "article",
                         id: webAppQueryId,
-                        title: `Новое сообщение от: ${data.user.username.toString()}`,
+                        title: `Новое сообщение от: ${data.user.username}`,
                         input_message_content: {
                             message_text: data.text
                         }
