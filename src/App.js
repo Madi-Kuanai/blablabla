@@ -50,6 +50,7 @@ function App() {
                     if (responseData.ok) {
                         tg.close(); // Закрываем WebApp, если отправка успешна
                     }
+                    alert("Ваше сообщение опубликовано")
                 })
                 .catch(error => console.error("Error sending WebAppQuery result:", error));
 
