@@ -56,7 +56,7 @@ function App() {
         } else {
             console.error('Telegram WebApp API не доступен');
         }
-    }, [text]);
+    }, [text, tg, user?.first_name, user?.last_name, user?.username]);
 
     return (
         <div className="App">
