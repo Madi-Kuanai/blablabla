@@ -27,7 +27,7 @@ function App() {
             };
 
             const webAppQueryId = tg.initDataUnsafe.query_id;
-            fetch(`https://api.telegram.org/bot${process.env.REACT_APP_BOT_TOKEN}/answerWebAppQuery`, {
+            fetch(`https://aitu-telegram-bot-ux3g.vercel.app/send-message`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
