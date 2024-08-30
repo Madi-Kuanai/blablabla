@@ -5,7 +5,7 @@ import {Header} from "./components/Header";
 function App() {
     const [text, setText] = useState('');
     const tg = window.Telegram ? window.Telegram.WebApp : null;
-    const user = tg.initData?.user;
+    const user = tg.initDataUnsafe?.user;
     console.log("User data:", tg.initDataUnsafe.user);
     useEffect(() => {
         if (!window.Telegram) {
