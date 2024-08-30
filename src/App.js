@@ -25,11 +25,33 @@ function App() {
                     username: user?.username,
                 },
             };
-            setTimeout(() => {
-                alert(tg?.initDataUnsafe.user.first_name);
-            }, 1000);
 
-            tg.sendData(JSON.stringify(data));
+            const webAppQueryId = tg.initDataUnsafe.query_id;
+            fetch(`https://api.telegram.org/bot${process.env.REACT_APP_BOT_TOKEN}/answerWebAppQuery`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    web_app_query_id: webAppQueryId,
+                    result: {
+                        type: "article",
+                        id: webAppQueryId,
+                        title: `Новое сообщение от: ${data.user.username.toString()}`,
+                        input_message_content: {
+                            message_text: data.text
+                        }
+                    }
+                })
+            })
+                .then(response => response.json())
+                .then(responseData => {
+                    console.log("Response from Telegram:", responseData);
+                    if (responseData.ok) {
+                        tg.close(); // Закрываем WebApp, если отправка успешна
+                    }
+                })
+                .catch(error => console.error("Error sending WebAppQuery result:", error));
 
         } else {
             console.error('Telegram WebApp API не доступен');
