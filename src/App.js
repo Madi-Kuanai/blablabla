@@ -5,7 +5,7 @@ import {Header} from "./components/Header";
 function App() {
     const [text, setText] = useState('');
     const tg = window.Telegram ? window.Telegram.WebApp : null;
-    const user = tg.initDataUnsafe?.user;
+    const user = tg.initDataUnsafe.user;
     console.log("User data:", tg.initDataUnsafe.user);
     useEffect(() => {
         if (!window.Telegram) {
@@ -37,7 +37,7 @@ function App() {
                     result: {
                         type: "article",
                         id: webAppQueryId,
-                        title: `Новое сообщение от: ${data.user.username}`,
+                        title: `${data.user.username}`,
                         input_message_content: {
                             message_text: data.text
                         }
