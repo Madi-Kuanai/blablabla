@@ -27,7 +27,7 @@ function App() {
             };
 
             const webAppQueryId = tg.initDataUnsafe.query_id;
-            fetch(`https://aitutelegrambot-production.up.railway.app//send-message`, {
+            fetch(`https://aitutelegrambot-production.up.railway.app/send-message`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
