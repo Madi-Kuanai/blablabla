@@ -1,7 +1,7 @@
-import {useEffect, useState, useCallback} from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import "./App.css";
-import {Header} from "./components/Header";
-import {CustomAlert} from "./components/CustomAlert";
+import { Header } from "./components/Header";
+import { CustomAlert } from "./components/CustomAlert";
 
 function App() {
     const [text, setText] = useState('');
@@ -77,11 +77,9 @@ function App() {
 
     return (
         <div className="App">
-            <Header/>
+            <Header />
             {loading ? (
-                <div>
-                    <CustomAlert isEnd={isEnd} isError={isError} onButtonClick={resetLoading} />
-                </div>
+                <CustomAlert isEnd={isEnd} isError={isError} onButtonClick={resetLoading} />
             ) : (
                 <>
                     <textarea
