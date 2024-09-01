@@ -86,9 +86,9 @@ function App() {
                         value={text}
                         onChange={(e) => setText(e.target.value)}
                     ></textarea>
-                    <button className="submit-button" onClick={onSendData}>
-                        Отправить
-                    </button>
+                    {/*<button className="submit-button" onClick={onSendData}>*/}
+                    {/*    Отправить*/}
+                    {/*</button>*/}
                 </>
             )}
         </div>
