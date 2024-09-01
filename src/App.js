@@ -59,6 +59,7 @@ function App() {
                 .then((responseData) => {
                     console.log("Response from Telegram:", responseData);
                     if (responseData.ok) {
+                        setIsEnd(true);
                         tg.close();
                     }
                 })
