@@ -14,8 +14,7 @@ function App() {
     }, []);
 
     const onSendData = useCallback(() => {
-
-
+        const [loading, setLoading] = useState(true);
         if (tg) {
             const data = {
                 text,
@@ -46,13 +45,17 @@ function App() {
             })
                 .then(response => response.json())
                 .then(responseData => {
+                    setLoading(false);
                     console.log("Response from Telegram:", responseData);
                     if (responseData.ok) {
-                        tg.close(); // Закрываем WebApp, если отправка успешна
+                        tg.close();
                     }
-                    alert("Ваше сообщение опубликовано")
                 })
-                .catch(error => console.error("Error sending WebAppQuery result:", error));
+                .catch(error => {
+                    setLoading(false);
+                    console.error("Error sending WebAppQuery result:", error)
+                });
+            if (loading) return <p>Loading...</p>;
 
         } else {
             console.error('Telegram WebApp API не доступен');
