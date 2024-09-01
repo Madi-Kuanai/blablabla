@@ -2,7 +2,7 @@ import React from 'react';
 import Lottie from "react-lottie";
 import loadingAnimationData from 'public/alert-animation.json';
 import okAnimationData from 'public/ok-animation.json';
-import './CustomAlert.css';
+import '../CustomAlert.css';
 
 export function CustomAlert(props) {
     const {isEnd, isError, onButtonClick} = props;
