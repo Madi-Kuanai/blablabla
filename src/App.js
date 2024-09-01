@@ -1,8 +1,7 @@
-import {useEffect, useState, useCallback} from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import "./App.css";
-import {Header} from "./components/Header";
-import {CustomAlert} from "./components/CustomAlert";
-
+import { Header } from "./components/Header";
+import { CustomAlert } from "./components/CustomAlert";
 
 function App() {
     const [text, setText] = useState('');
@@ -22,6 +21,8 @@ function App() {
     const onSendData = useCallback(() => {
         if (tg) {
             setLoading(true);
+            setIsEnd(false);
+            setIsError(false);
 
             const data = {
                 text,
@@ -52,14 +53,14 @@ function App() {
             })
                 .then((response) => response.json())
                 .then((responseData) => {
-                    console.log("Response from Telegram:", responseData);
+                    setLoading(false);
+                    setIsEnd(true);
                     if (responseData.ok) {
                         tg.close();
-                        setIsEnd(true);
-
                     }
                 })
                 .catch((error) => {
+                    setLoading(false);
                     setIsEnd(true);
                     setIsError(true);
                     console.error("Error sending WebAppQuery result:", error);
@@ -70,19 +71,16 @@ function App() {
     }, [text, tg, user?.first_name, user?.last_name, user?.username]);
 
     const resetLoading = () => {
-        setTimeout(() => {
-            setLoading(false);
-            setIsEnd(false);
-            setIsError(false);
-        }, 2000); // Задержка в 2 секунды
+        setLoading(false);
+        setIsEnd(false);
+        setIsError(false);
     };
-
 
     return (
         <div className="App">
-            <Header/>
+            <Header />
             {loading ? (
-                <CustomAlert isEnd={isEnd} isError={isError} onButtonClick={resetLoading}/>
+                <CustomAlert isEnd={isEnd} isError={isError} onButtonClick={resetLoading} />
             ) : (
                 <>
                     <textarea

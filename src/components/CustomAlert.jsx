@@ -23,6 +23,8 @@ export function CustomAlert({ isEnd, isError, onButtonClick }) {
         }
     };
 
+    const animationOptions = isEnd ? endOptions : defaultOptions;
+
     return (
         <div className="mAlert-overlay">
             <div className="mAlert">
@@ -38,7 +40,7 @@ export function CustomAlert({ isEnd, isError, onButtonClick }) {
                     )}
                     <div className="lottie">
                         <Lottie
-                            options={isEnd ? endOptions : defaultOptions}
+                            options={animationOptions}
                             height={"50%"}
                             width={"50%"}
                         />
