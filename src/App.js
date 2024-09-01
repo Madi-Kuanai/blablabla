@@ -52,7 +52,7 @@ function App() {
                 .then((response) => response.json())
                 .then((responseData) => {
                     setLoading(false);
-                    setIsEnd(true)
+                    setIsEnd(true);
                     console.log("Response from Telegram:", responseData);
                     if (responseData.ok) {
                         tg.close();
@@ -60,7 +60,7 @@ function App() {
                 })
                 .catch((error) => {
                     setLoading(false);
-                    setIsEnd(true)
+                    setIsEnd(true);
                     setIsError(true);
                     console.error("Error sending WebAppQuery result:", error);
                 });
@@ -68,15 +68,19 @@ function App() {
             console.error('Telegram WebApp API не доступен');
         }
     }, [text, tg, user?.first_name, user?.last_name, user?.username]);
+
     const resetLoading = () => {
         setLoading(false);
+        setIsEnd(false);
+        setIsError(false);
     };
+
     return (
         <div className="App">
             <Header/>
             {loading ? (
                 <div>
-                    {<CustomAlert isEnd={isEnd} isError={isError} onButtonClick={resetLoading} />}
+                    <CustomAlert isEnd={isEnd} isError={isError} onButtonClick={resetLoading} />
                 </div>
             ) : (
                 <>
@@ -86,9 +90,9 @@ function App() {
                         value={text}
                         onChange={(e) => setText(e.target.value)}
                     ></textarea>
-                    {/*<button className="submit-button" onClick={onSendData}>*/}
-                    {/*    Отправить*/}
-                    {/*</button>*/}
+                    <button className="submit-button" onClick={onSendData}>
+                        Отправить
+                    </button>
                 </>
             )}
         </div>
