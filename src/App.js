@@ -1,7 +1,13 @@
-import { useEffect, useState, useCallback } from 'react';
+import {useEffect, useState, useCallback} from 'react';
 import "./App.css";
-import { Header } from "./components/Header";
-import { CustomAlert } from "./components/CustomAlert";
+import {Header} from "./components/Header";
+import {CustomAlert} from "./components/CustomAlert";
+
+function wait(t) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, 1000 * t);
+    });
+}
 
 function App() {
     const [text, setText] = useState('');
@@ -70,16 +76,18 @@ function App() {
     }, [text, tg, user?.first_name, user?.last_name, user?.username]);
 
     const resetLoading = () => {
-        setLoading(false);
-        setIsEnd(false);
-        setIsError(false);
+        wait(2).then(()=> {
+            setLoading(false);
+            setIsEnd(false);
+            setIsError(false);
+        })
     };
 
     return (
         <div className="App">
-            <Header />
+            <Header/>
             {loading ? (
-                <CustomAlert isEnd={isEnd} isError={isError} onButtonClick={resetLoading} />
+                <CustomAlert isEnd={isEnd} isError={isError} onButtonClick={resetLoading}/>
             ) : (
                 <>
                     <textarea
