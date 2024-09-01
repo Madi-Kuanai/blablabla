@@ -57,16 +57,12 @@ function App() {
             })
                 .then((response) => response.json())
                 .then((responseData) => {
-                    setLoading(false);
-                    setIsEnd(true);
                     console.log("Response from Telegram:", responseData);
                     if (responseData.ok) {
                         tg.close();
                     }
                 })
                 .catch((error) => {
-                    setLoading(false);
-                    setIsEnd(true);
                     setIsError(true);
                     console.error("Error sending WebAppQuery result:", error);
                 });
