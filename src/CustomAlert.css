@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background-color: #070505;
+    background-color: #323232;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 400px;
@@ -37,7 +37,7 @@
 }
 
 .alert-button button {
-    background-color: #14365c;
+    background-color: #464646;
     color: #fff;
     border: none;
     padding: 10px 20px;
