@@ -5,6 +5,8 @@ import {Header} from "./components/Header";
 function App() {
     const [text, setText] = useState('');
     const tg = window.Telegram ? window.Telegram.WebApp : null;
+    const [loading, setLoading] = useState(true);
+
     const user = tg.initDataUnsafe.user;
     console.log("User data:", tg.initDataUnsafe.user);
     useEffect(() => {
@@ -14,7 +16,6 @@ function App() {
     }, []);
 
     const onSendData = useCallback(() => {
-        const [loading, setLoading] = useState(true);
         if (tg) {
             const data = {
                 text,
