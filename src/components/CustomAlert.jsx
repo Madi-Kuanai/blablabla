@@ -1,8 +1,8 @@
 import React from 'react';
 import Lottie from "react-lottie";
-import loadingAnimationData from '../assets/alert-animation.json';
-import okAnimationData from '../assets/ok-animation.json';
-import '../CustomAlert.css';
+import loadingAnimationData from 'public/alert-animation.json';
+import okAnimationData from 'public/ok-animation.json';
+import './CustomAlert.css';
 
 export function CustomAlert({ isEnd, isError, onButtonClick }) {
     const defaultOptions = {

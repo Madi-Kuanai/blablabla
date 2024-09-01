@@ -3,11 +3,6 @@ import "./App.css";
 import {Header} from "./components/Header";
 import {CustomAlert} from "./components/CustomAlert";
 
-function wait(t) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, 1000 * t);
-    });
-}
 
 function App() {
     const [text, setText] = useState('');
@@ -59,11 +54,13 @@ function App() {
                 .then((responseData) => {
                     console.log("Response from Telegram:", responseData);
                     if (responseData.ok) {
-                        setIsEnd(true);
                         tg.close();
+                        setIsEnd(true);
+
                     }
                 })
                 .catch((error) => {
+                    setIsEnd(true);
                     setIsError(true);
                     console.error("Error sending WebAppQuery result:", error);
                 });
@@ -73,12 +70,13 @@ function App() {
     }, [text, tg, user?.first_name, user?.last_name, user?.username]);
 
     const resetLoading = () => {
-        wait(2).then(()=> {
+        setTimeout(() => {
             setLoading(false);
             setIsEnd(false);
             setIsError(false);
-        })
+        }, 2000); // Задержка в 2 секунды
     };
+
 
     return (
         <div className="App">
