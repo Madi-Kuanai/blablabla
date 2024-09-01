@@ -1,14 +1,17 @@
 import {useEffect, useState, useCallback} from 'react';
-import "./App.css"
+import "./App.css";
 import {Header} from "./components/Header";
+import {CustomAlert} from "./components/CustomAlert";
 
 function App() {
     const [text, setText] = useState('');
-    const tg = window.Telegram ? window.Telegram.WebApp : null;
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [isEnd, setIsEnd] = useState(false);
+    const [isError, setIsError] = useState(false);
 
-    const user = tg.initDataUnsafe.user;
-    console.log("User data:", tg.initDataUnsafe.user);
+    const tg = window.Telegram ? window.Telegram.WebApp : null;
+    const user = tg?.initDataUnsafe.user;
+
     useEffect(() => {
         if (!window.Telegram) {
             console.error('Telegram WebApp API не доступен');
@@ -17,6 +20,8 @@ function App() {
 
     const onSendData = useCallback(() => {
         if (tg) {
+            setLoading(true);
+
             const data = {
                 text,
                 user: {
@@ -39,42 +44,51 @@ function App() {
                         id: webAppQueryId,
                         title: `${data.user.username}`,
                         input_message_content: {
-                            message_text: data.text
-                        }
-                    }
-                })
+                            message_text: data.text,
+                        },
+                    },
+                }),
             })
-                .then(response => response.json())
-                .then(responseData => {
+                .then((response) => response.json())
+                .then((responseData) => {
                     setLoading(false);
+                    setIsEnd(true)
                     console.log("Response from Telegram:", responseData);
                     if (responseData.ok) {
                         tg.close();
                     }
                 })
-                .catch(error => {
+                .catch((error) => {
                     setLoading(false);
-                    console.error("Error sending WebAppQuery result:", error)
+                    setIsEnd(true)
+                    setIsError(true);
+                    console.error("Error sending WebAppQuery result:", error);
                 });
-            if (loading) return <p>Loading...</p>;
-
         } else {
             console.error('Telegram WebApp API не доступен');
         }
-    }, [loading, text, tg, user?.first_name, user?.last_name, user?.username]);
+    }, [text, tg, user?.first_name, user?.last_name, user?.username]);
 
     return (
         <div className="App">
             <Header/>
-            <textarea
-                className="text-box"
-                placeholder="Введите текст..."
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-            ></textarea>
-            <button className="submit-button" onClick={onSendData}>
-                Отправить
-            </button>
+            {loading ? (
+                <div>
+                    {<CustomAlert isEnd={isEnd} isError={isError} />}
+                </div>
+            ) : (
+                <>
+                    <textarea
+                        className="text-box"
+                        placeholder="Введите текст..."
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
+                    ></textarea>
+                    <button className="submit-button" onClick={onSendData}>
+                        Отправить
+                    </button>
+                </>
+            )}
         </div>
     );
 }
