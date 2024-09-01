@@ -5,7 +5,7 @@ import okAnimationData from 'public/ok-animation.json';
 import './CustomAlert.css';
 
 export function CustomAlert(props) {
-    const {isEnd, isError} = props;
+    const {isEnd, isError, onButtonClick} = props;
 
     const defaultOptions = {
         loop: true, autoplay: true, animationData: loadingAnimationData, rendererSettings: {
@@ -32,7 +32,7 @@ export function CustomAlert(props) {
                 </div>
             </div>
             <div className="alert-button">
-                <button>Готово</button>
+                <button onClick={onButtonClick}>Готово</button>
             </div>
         </div>);
 }

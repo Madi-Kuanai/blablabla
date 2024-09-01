@@ -68,13 +68,15 @@ function App() {
             console.error('Telegram WebApp API не доступен');
         }
     }, [text, tg, user?.first_name, user?.last_name, user?.username]);
-
+    const resetLoading = () => {
+        setLoading(false);
+    };
     return (
         <div className="App">
             <Header/>
             {loading ? (
                 <div>
-                    {<CustomAlert isEnd={isEnd} isError={isError} />}
+                    {<CustomAlert isEnd={isEnd} isError={isError} onButtonClick={resetLoading} />}
                 </div>
             ) : (
                 <>
