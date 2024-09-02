@@ -1,7 +1,7 @@
-import { useEffect, useState, useCallback } from 'react';
+import {useEffect, useState, useCallback} from 'react';
 import "./App.css";
-import { Header } from "./components/Header";
-import { CustomAlert } from "./components/CustomAlert";
+import {Header} from "./components/Header";
+import {CustomAlert} from "./components/CustomAlert";
 
 function App() {
     const [text, setText] = useState('');
@@ -10,7 +10,7 @@ function App() {
     const [isError, setIsError] = useState(false);
 
     const tg = window.Telegram ? window.Telegram.WebApp : null;
-    const user = tg?.initDataUnsafe.user;
+    const dataUnsafe = tg?.initDataUnsafe
 
     useEffect(() => {
         if (!window.Telegram) {
@@ -26,11 +26,7 @@ function App() {
 
             const data = {
                 text,
-                user: {
-                    first_name: user?.first_name,
-                    last_name: user?.last_name,
-                    username: user?.username,
-                },
+                dataUnsafe
             };
 
             const webAppQueryId = tg.initDataUnsafe.query_id;
@@ -44,7 +40,7 @@ function App() {
                     result: {
                         type: "article",
                         id: webAppQueryId,
-                        title: `${data.user.username}`,
+                        title: `${dataUnsafe}`,
                         input_message_content: {
                             message_text: data.text,
                         },
@@ -68,7 +64,7 @@ function App() {
         } else {
             console.error('Telegram WebApp API не доступен');
         }
-    }, [text, tg, user?.first_name, user?.last_name, user?.username]);
+    }, [text, tg, dataUnsafe]);
 
     const resetLoading = () => {
         setLoading(false);
@@ -78,9 +74,9 @@ function App() {
 
     return (
         <div className="App">
-            <Header />
+            <Header/>
             {loading ? (
-                <CustomAlert isEnd={isEnd} isError={isError} onButtonClick={resetLoading} />
+                <CustomAlert isEnd={isEnd} isError={isError} onButtonClick={resetLoading}/>
             ) : (
                 <>
                     <textarea
