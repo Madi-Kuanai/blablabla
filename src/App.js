@@ -40,7 +40,7 @@ function App() {
                     result: {
                         type: "article",
                         id: webAppQueryId,
-                        title: data.dataUnsafe.toString(),
+                        title: data.dataUnsafe,
                         input_message_content: {
                             message_text: data.text,
                         },
