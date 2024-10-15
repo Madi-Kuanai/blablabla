@@ -3,6 +3,12 @@ import "./App.css";
 import {Header} from "./components/Header";
 import {CustomAlert} from "./components/CustomAlert";
 
+function Footer() {
+    return <div className="footer">
+        <p>© K_M & O_A</p>
+        </div>;
+}
+
 function App() {
     const [text, setText] = useState('');
     const [loading, setLoading] = useState(false);
@@ -25,23 +31,16 @@ function App() {
             setIsError(false);
 
             const data = {
-                text,
-                dataUnsafe
+                text, dataUnsafe
             };
 
             const webAppQueryId = tg.initDataUnsafe.query_id;
             fetch(`https://aitutelegrambot-production.up.railway.app/send-message`, {
-                method: 'POST',
-                headers: {
+                method: 'POST', headers: {
                     'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    web_app_query_id: webAppQueryId,
-                    result: {
-                        type: "article",
-                        id: webAppQueryId,
-                        title: data.dataUnsafe,
-                        input_message_content: {
+                }, body: JSON.stringify({
+                    web_app_query_id: webAppQueryId, result: {
+                        type: "article", id: webAppQueryId, title: data.dataUnsafe, input_message_content: {
                             message_text: data.text,
                         },
                     },
@@ -72,13 +71,9 @@ function App() {
         setIsError(false);
     };
 
-    return (
-        <div className="App">
+    return (<div className="App">
             <Header/>
-            {loading ? (
-                <CustomAlert isEnd={isEnd} isError={isError} onButtonClick={resetLoading}/>
-            ) : (
-                <>
+            {loading ? (<CustomAlert isEnd={isEnd} isError={isError} onButtonClick={resetLoading}/>) : (<>
                     <textarea
                         className="text-box"
                         placeholder="Введите текст..."
@@ -88,10 +83,9 @@ function App() {
                     <button className="submit-button" onClick={onSendData}>
                         Отправить
                     </button>
-                </>
-            )}
-        </div>
-    );
+                </>)}
+            <Footer/>
+        </div>);
 }
 
 export default App;
