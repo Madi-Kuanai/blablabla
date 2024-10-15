@@ -1,56 +1,61 @@
 .App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #1c1c1c; /* Темный фон */
-  margin: 0;
-  flex-direction: column; /* Располагаем дочерние элементы вертикально */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1c1c1c; /* Темный фон */
+    margin: 0;
+    flex-direction: column; /* Располагаем дочерние элементы вертикально */
 }
 
 .form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+}
+
+.footer {
+    margin-top: 20px;
+    color: #595252;
 }
 
 .text-box {
-  width: 75%;
-  height: 50%;
-  border: 1px solid #444; /* Темная граница */
-  background-color: #333; /* Темный фон для текстбокса */
-  color: #fff; /* Белый текст */
-  padding: 10px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  font-size: 16px;
-  resize: none; /* Отключение возможности изменения размера */
+    width: 75%;
+    height: 50%;
+    border: 1px solid #444; /* Темная граница */
+    background-color: #333; /* Темный фон для текстбокса */
+    color: #fff; /* Белый текст */
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: none; /* Отключение возможности изменения размера */
 }
 
 .submit-button {
-  margin-top: 10px;
-  background-color: #444; /* Темный фон кнопки */
-  color: #fff; /* Белый текст */
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
+    margin-top: 10px;
+    background-color: #444; /* Темный фон кнопки */
+    color: #fff; /* Белый текст */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .submit-button:hover {
-  background-color: #555; /* Слегка светлее при наведении */
+    background-color: #555; /* Слегка светлее при наведении */
 }
 
-.icon{
-  max-width: 80%;
-  margin-bottom: 20px;
+.icon {
+    max-width: 80%;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {
-  .text-box {
-    width: 80%;
-    height: 30%; /* Меньшая высота на мобильных устройствах */
-  }
+    .text-box {
+        width: 80%;
+        height: 30%; /* Меньшая высота на мобильных устройствах */
+    }
 }
